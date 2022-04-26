@@ -17,13 +17,14 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;SneakerCollector</a></li>
         </ul>
         <ul class="right">
-		  <li><a href="/sneakers">View All Sneakers</a></li>
-          <li><a href="/about">About The Sneaker Collector</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'index' %}">View All Sneakers</a></li>
+            <li><a href="{% url 'sneakers_create' %}">Add A Sneaker</a></li>
         </ul>
       </div>
     </nav>
   </header>
-  <main class="card-panel teal lighten-2">
+  <main>
     {% block content %}
     {% endblock %}
   </main>

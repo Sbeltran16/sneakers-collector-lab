@@ -1,9 +1,21 @@
 from django.shortcuts import render
 
 # Create your views here.
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponse #res.send in express
 from .models import Sneaker #importing our model
 
+class SneakerCreate(CreateView):
+    model = Sneaker
+    fields = '__all__'
+
+class SneakerUpdate(UpdateView):
+    model = Sneaker
+    fields = ['brand', 'description', 'price']
+
+class SneakerDelete(DeleteView):
+    model = Sneaker
+    success_url = '/sneakers/'
 
 
 def home(request):
