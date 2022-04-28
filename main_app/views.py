@@ -31,8 +31,11 @@ def sneakers_index(request):
 
 def sneakers_detail(request, sneaker_id): # path('cats/<int:cat_id>/' <- this is where cat_id comes from
     sneaker = Sneaker.objects.get(id=sneaker_id)
+    laces_sneaker_doesnt_have = Sneaker.objects.exclude(id__in = sneaker.laces.all().values_list('id'))
     buyer_form = BuyerForm()
-    return render(request, 'sneakers/detail.html', {'sneaker': sneaker, 'buyer_form': buyer_form})
+    return render(request, 'sneakers/detail.html', {'sneaker': sneaker, 'buyer_form': buyer_form,
+    'laces': laces_sneaker_doesnt_have
+    })
 
 def add_buyer(request, sneaker_id):
     form = BuyerForm(request.POST)
@@ -41,5 +44,9 @@ def add_buyer(request, sneaker_id):
         new_buyer = form.save(commit=False)
         new_buyer.sneaker_id = sneaker_id
         new_buyer.save()
-        
+
     return redirect('detail', sneaker_id=sneaker_id)
+
+def assoc_lace(request, sneaker_id, lace_id):
+  Sneaker.objects.get(id=sneaker_id).laces.add(lace_id)
+  return redirect('detail', sneaker_id=sneaker_id)

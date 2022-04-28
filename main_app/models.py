@@ -1,12 +1,35 @@
 from django.db import models
 from django.urls import reverse
 
+
+LACES = (
+  ('L', 'Large'),
+  ('M', 'Medium'),
+  ('S', 'Small')
+)
+
+class Laces(models.Model):
+  size = models.CharField(
+    'Lace Size',
+    max_length=1,
+    choices=LACES,
+    default=LACES[0][0]
+  )
+  color = models.CharField(max_length=20)
+
+  def __str__(self):
+    return f"Size {self.size} and Color {self.color}"
+
+  def get_absolute_url(self):
+    return reverse('sneakers_detail', kwargs={'pk': self.id})
+
 # Create your models here.
 class Sneaker(models.Model):
   name = models.CharField(max_length=100)
   brand = models.CharField(max_length=100)
   description = models.CharField(max_length=250)
   price = models.IntegerField('Retail Price')
+  laces = models.ManyToManyField(Laces)
 
 
   def get_absolute_url(self):
