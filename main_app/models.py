@@ -9,7 +9,7 @@ LACES = (
 )
 
 class Laces(models.Model):
-  size = models.CharField(
+  sizes = models.CharField(
     'Lace Size',
     max_length=1,
     choices=LACES,
@@ -18,10 +18,10 @@ class Laces(models.Model):
   color = models.CharField(max_length=20)
 
   def __str__(self):
-    return f"Size {self.size} and Color {self.color}"
+    return f"Size {self.sizes} and Color {self.color}"
 
   def get_absolute_url(self):
-    return reverse('sneakers_detail', kwargs={'pk': self.id})
+    return reverse('laces_detail', kwargs={'pk': self.id})
 
 # Create your models here.
 class Sneaker(models.Model):
@@ -30,7 +30,6 @@ class Sneaker(models.Model):
   description = models.CharField(max_length=250)
   price = models.IntegerField('Retail Price')
   laces = models.ManyToManyField(Laces)
-
 
   def get_absolute_url(self):
       return reverse('detail', kwargs={'sneaker_id': self.id})

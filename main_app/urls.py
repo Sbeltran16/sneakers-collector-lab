@@ -12,8 +12,7 @@ urlpatterns = [
     path('sneakers/<int:sneaker_id>/add_buyer/', views.add_buyer, name='add_buyer'),
     path('sneakers/<int:sneaker_id>/assoc_lace/<int:lace_id>/', views.assoc_lace, name='assoc_lace'),
     path('laces/', views.LaceList.as_view(), name='laces_index'),
-    path('laces/<int:pk>/', views.Detail.as_view(), name='laces_detail'),
+    path('laces/<int:pk>/', views.LaceDetail.as_view(), name='laces_detail'),
     path('laces/create/', views.LaceCreate.as_view(), name='laces_create'),
-    path('laces/<int:pk>/update/', views.LaceUpdate.as_view(), name='laces_update'),
     path('laces/<int:pk>/delete/', views.LaceDelete.as_view(), name='laces_delete'),
 ]

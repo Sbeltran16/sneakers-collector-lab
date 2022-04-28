@@ -40,7 +40,6 @@
     </table>
   </div>
 </div>
-<!-- This is all new markup to be added just above the <script> tag -->
   <hr>
   <div class="row">
     <div class="col s6">
@@ -50,7 +49,7 @@
           <div class="card">
             <div class="card-content">
               <span class="card-title">
-                <span>This Shoe has {{ lace.color }}</span> Laces!
+                This Shoe has {{ lace.color }} size {{lace.sizes}} Laces!
               </span>
             </div>
           </div>
@@ -59,7 +58,6 @@
         <h5>No Laces Bought</h5>
       {% endif %}
     </div>
-    <!-- Available toys will come after this line -->
     <div class="col s6">
       <h3>Available Laces</h3>
       {% if laces.count %}
@@ -67,7 +65,7 @@
           <div class="card">
             <div class="card-content">
               <span class="card-title">
-                <span>{{ lace.color }}</span> {{ lace.name }}
+                {{ lace.color }} Size {{ lace.sizes }} Laces
               </span>
             </div>
             <div class="card-action">
@@ -79,9 +77,10 @@
           </div>
         {% endfor %}
       {% else %}
-        <h5>{{cat.name}} All Laces are Taken</h5>
+        <h5>{{lace.sizes}} All Laces are Taken</h5>
       {% endif %}
     </div>
+
 <script>
     const dateEl = document.getElementById('id_bought');
     M.Datepicker.init(dateEl, {
@@ -93,6 +92,7 @@
 
   const selectEl = document.getElementById('id_size');
   M.FormSelect.init(selectEl);
+
 </script>
 
 {% endblock %}

@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from django.http import HttpResponse #res.send in express
-from .models import Sneaker #importing our model
+from .models import Sneaker, Laces #importing our model
 from .forms import BuyerForm
 
 class SneakerCreate(CreateView):
@@ -50,3 +51,18 @@ def add_buyer(request, sneaker_id):
 def assoc_lace(request, sneaker_id, lace_id):
   Sneaker.objects.get(id=sneaker_id).laces.add(lace_id)
   return redirect('detail', sneaker_id=sneaker_id)
+
+
+class LaceList(ListView):
+  model = Laces
+
+class LaceDetail(DetailView):
+  model = Laces
+
+class LaceCreate(CreateView):
+  model = Laces
+  fields = '__all__'
+
+class LaceDelete(DeleteView):
+  model = Laces
+  success_url = '/laces/'
